@@ -15,7 +15,7 @@ void u_prog_a(void);
 void u_prog_b(void);
 
 int main(void) {
-   put_str("I am kernel\n");
+   put_str("HaoYu Tan: I am kernel\n");
    init_all();
    while(1);
    process_execute(u_prog_a, "u_prog_a");
