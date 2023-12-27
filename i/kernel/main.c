@@ -29,10 +29,10 @@ int main(void) {
    int fd = sys_open("/dir1/subdir1/file2", O_CREAT|O_RDWR);
    if (fd != -1) {
       printf("HaoYu Tan: /dir1/subdir1/file2 create done!\n");
-      sys_write(fd, "Catch me if you can!\n", 21);
+      sys_write(fd, "Descartes: I think,therefore I am\n", 33);
       sys_lseek(fd, 0, SEEK_SET);
-      char buf[32] = {0};
-      sys_read(fd, buf, 21); 
+      char buf[40] = {0};
+      sys_read(fd, buf, 33); 
       printf("HaoYu Tan: /dir1/subdir1/file2 says:\n%s", buf);
       sys_close(fd);
    }
