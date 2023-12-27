@@ -97,6 +97,8 @@ struct task_struct {
 
    uint32_t* pgdir;              // 进程自己页表的虚拟地址
    struct virtual_addr userprog_vaddr;   // 用户进程的虚拟地址
+   uint32_t cwd_inode_nr;				//进程所在工作目录的inode编号
+   int16_t parent_pid;					//父进程pid
    struct mem_block_desc u_block_desc[DESC_CNT];   // 用户进程内存块描述符
 
    uint32_t stack_magic;	 // 用这串数字做栈的边界标记,用于检测栈的溢出
