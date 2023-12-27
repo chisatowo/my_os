@@ -1,6 +1,7 @@
 #ifndef __FS_DIR_H
 #define __FS_DIR_H
 #include "stdint.h"
+#include "fs.h"
 #include "inode.h"
 #include "ide.h"
 #include "global.h"
