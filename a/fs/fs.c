@@ -21,13 +21,21 @@ static void partition_format(struct partition* part) {
    uint32_t used_sects = boot_sector_sects + super_block_sects + inode_bitmap_sects + inode_table_sects;
    uint32_t free_sects = part->sec_cnt - used_sects;  
 
-/************** 简单处理块位图占据的扇区数 ***************/
-   uint32_t block_bitmap_sects;
-   block_bitmap_sects = DIV_ROUND_UP(free_sects, BITS_PER_SECTOR);
-   /* block_bitmap_bit_len是位图中位的长度,也是可用块的数量 */
-   uint32_t block_bitmap_bit_len = free_sects - block_bitmap_sects; 
-   block_bitmap_sects = DIV_ROUND_UP(block_bitmap_bit_len, BITS_PER_SECTOR); 
-/*********************************************************/
+
+    /************** 简单处理块位图占据的扇区数 ***************/
+    uint32_t now_total_free_sects = free_sects; // 定义一个现在总的可用扇区数
+    uint32_t prev_block_bitmap_sects = 0; // 之前的块位图扇区数
+    uint32_t block_bitmap_sects = DIV_ROUND_UP(now_total_free_sects, BITS_PER_SECTOR); // 初始估算
+    uint32_t block_bitmap_bit_len;
+
+    while (block_bitmap_sects != prev_block_bitmap_sects) {
+        prev_block_bitmap_sects = block_bitmap_sects;
+        /* block_bitmap_bit_len是位图中位的长度,也是可用块的数量 */
+        block_bitmap_bit_len = now_total_free_sects - block_bitmap_sects;
+        block_bitmap_sects = DIV_ROUND_UP(block_bitmap_bit_len, BITS_PER_SECTOR);
+    }
+    /*********************************************************/
+
    
    /* 超级块初始化 */
    struct super_block sb;
@@ -78,7 +86,7 @@ static void partition_format(struct partition* part) {
    
    /* 2 再将上一步中覆盖的最后一字节内的有效位重新置0 */
    uint8_t bit_idx = 0;
-   while (bit_idx <= block_bitmap_last_bit) {
+   while (bit_idx < block_bitmap_last_bit) {
       buf[block_bitmap_last_byte] &= ~(1 << bit_idx++);
    }
    ide_write(hd, sb.block_bitmap_lba, buf, sb.block_bitmap_sects);
