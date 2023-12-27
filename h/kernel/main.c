@@ -17,25 +17,13 @@ void u_prog_a(void);
 void u_prog_b(void);
 
 int main(void) {
-   put_str("I am kernel\n");
+   put_str("HaoYu Tan: I am kernel\n");
    init_all();
    process_execute(u_prog_a, "u_prog_a");
    process_execute(u_prog_b, "u_prog_b");
    thread_start("k_thread_a", 31, k_thread_a, "I am thread_a");
    thread_start("k_thread_b", 31, k_thread_b, "I am thread_b");
-   printf("HaoYu Tan: /dir1/subdir1 create %s!\n", sys_mkdir("/dir1/subdir1") == 0 ? "done" : "fail");
-   printf("HaoYu Tan: /dir1 create %s!\n", sys_mkdir("/dir1") == 0 ? "done" : "fail");
-   printf("HaoYu Tan: now, /dir1/subdir1 create %s!\n", sys_mkdir("/dir1/subdir1") == 0 ? "done" : "fail");
-   int fd = sys_open("/dir1/subdir1/file2", O_CREAT|O_RDWR);
-   if (fd != -1) {
-      printf("HaoYu Tan: /dir1/subdir1/file2 create done!\n");
-      sys_write(fd, "Catch me if you can!\n", 21);
-      sys_lseek(fd, 0, SEEK_SET);
-      char buf[32] = {0};
-      sys_read(fd, buf, 21); 
-      printf("HaoYu Tan: /dir1/subdir1/file2 says:\n%s", buf);
-      sys_close(fd);
-   }
+   printf("HaoYu Tan: /file1 delete %s!\n", sys_unlink("/file1") == 0 ? "done" : "fail");
    while(1);
    return 0;
 }
