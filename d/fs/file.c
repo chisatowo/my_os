@@ -203,6 +203,7 @@ int32_t file_open(uint32_t inode_no, uint8_t flag) {
 	 intr_set_status(old_status);	  // 恢复中断
       } else {		// 直接失败返回
 	 intr_set_status(old_status);
+	 file_table[fd_idx].fd_inode = NULL;
 	 printk("file can`t be write now, try again later\n");
 	 return -1;
       }
