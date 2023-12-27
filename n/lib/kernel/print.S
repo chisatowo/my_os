@@ -152,6 +152,44 @@ put_char:
    popad
    ret
 
+
+global mouse_move
+mouse_move:
+; 保存寄存器环境
+	push eax
+	push ecx
+	push edx
+
+	mov ax, SELECTOR_VIDEO
+	mov gs, ax
+	mov ecx, [esp+16]
+
+	inc ecx
+	mov byte [gs:ecx], 0x77
+	dec ecx
+	pop edx
+	pop ecx
+	pop eax
+	ret
+
+global mouse_recover
+mouse_recover:
+	push eax
+	push ecx
+	push edx
+
+	mov ax, SELECTOR_VIDEO
+
+	mov gs, ax
+	mov ecx, [esp+16]
+
+	inc ecx
+	mov byte [gs:ecx], 0x07
+	dec ecx
+	pop edx
+	pop ecx
+	pop eax
+	ret
 ;--------------------   将小端字节序的数字变成对应的ascii后，倒置   -----------------------
 ;输入：栈中参数为待打印的数字
 ;输出：在屏幕上打印16进制数字,并不会打印前缀0x,如打印10进制15时，只会直接打印f，不会是0xf

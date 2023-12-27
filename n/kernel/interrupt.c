@@ -58,7 +58,7 @@ static void pic_init(void) {
    outb (PIC_M_DATA, 0xf8);
 
 /* 打开从片上的IRQ14,此引脚接收硬盘控制器的中断 */
-   outb (PIC_S_DATA, 0xbf);
+   outb (PIC_S_DATA, 0xaf);
 
    put_str("   pic_init done\n");
 }
