@@ -22,11 +22,11 @@ int main(void) {
 /********  测试代码  ********/
    struct stat obj_stat;
    sys_stat("/", &obj_stat);
-   printf("/`s info\n   i_no:%d\n   size:%d\n   filetype:%s\n", \
+   printf("HaoYu Tan: /`s info\n   i_no:%d\n   size:%d\n   filetype:%s\n", \
 	 obj_stat.st_ino, obj_stat.st_size, \
 	 obj_stat.st_filetype == 2 ? "directory" : "regular");
    sys_stat("/dir1", &obj_stat);
-   printf("/dir1`s info\n   i_no:%d\n   size:%d\n   filetype:%s\n", \
+   printf("HaoYu Tan: /dir1`s info\n   i_no:%d\n   size:%d\n   filetype:%s\n", \
 	 obj_stat.st_ino, obj_stat.st_size, \
 	 obj_stat.st_filetype == 2 ? "directory" : "regular");
 /********  测试代码  ********/
