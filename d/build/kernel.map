@@ -383,7 +383,7 @@ LOAD build/dir.o
 .plt.sec
  *(.plt.sec)
 
-.text           0x00000000c0001500     0x8331
+.text           0x00000000c0001500     0x834e
  *(.text.unlikely .text.*_unlikely .text.unlikely.*)
  *(.text.exit .text.exit.*)
  *(.text.startup .text.startup.*)
@@ -546,7 +546,7 @@ LOAD build/dir.o
                 0x00000000c000871c                inode_open
                 0x00000000c0008875                inode_close
                 0x00000000c0008904                inode_init
- .text          0x00000000c0008969      0x701 build/file.o
+ .text          0x00000000c0008969      0x71e build/file.o
                 0x00000000c0008969                get_free_slot_in_global
                 0x00000000c00089db                pcb_fd_install
                 0x00000000c0008a5d                inode_bitmap_alloc
@@ -554,14 +554,14 @@ LOAD build/dir.o
                 0x00000000c0008b1c                bitmap_sync
                 0x00000000c0008bb9                file_create
                 0x00000000c0008ec8                file_open
-                0x00000000c0009013                file_close
- .text          0x00000000c000906a      0x7c7 build/dir.o
-                0x00000000c000906a                open_root_dir
-                0x00000000c00090b3                dir_open
-                0x00000000c0009104                search_dir_entry
-                0x00000000c00092f1                dir_close
-                0x00000000c0009339                create_dir_entry
-                0x00000000c00093c1                sync_dir_entry
+                0x00000000c0009030                file_close
+ .text          0x00000000c0009087      0x7c7 build/dir.o
+                0x00000000c0009087                open_root_dir
+                0x00000000c00090d0                dir_open
+                0x00000000c0009121                search_dir_entry
+                0x00000000c000930e                dir_close
+                0x00000000c0009356                create_dir_entry
+                0x00000000c00093de                sync_dir_entry
  *(.gnu.warning)
 
 .fini
