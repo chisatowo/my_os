@@ -31,6 +31,7 @@ static void idle(void* arg UNUSED) {
 struct task_struct* running_thread() {
    uint32_t esp; 
    asm ("mov %%esp, %0" : "=g" (esp));
+   //疑问:esp还有小数部分?
   /* 取esp整数部分即pcb起始地址 */
    return (struct task_struct*)(esp & 0xfffff000);
 }
